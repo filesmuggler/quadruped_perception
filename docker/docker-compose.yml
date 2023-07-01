@@ -4,12 +4,12 @@ services:
     build: .
     privileged: true
     environment:
-      - "DISPLAY=1"
-      - "QT_X11_NO_MITSHM=1"
+      - "DISPLAY=:1"
+      - "QT_X11_NO_MITSHM=:1"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /media/yerba/Projects/qp/rosbags:/rosbags/
-      - /media/yerba/Projects/qp/catkin_ws:/catkin_ws/
+      - /home/yerba/Projects/qp/rosbags/:/rosbags:rw
+      - /home/yerba/Projects/qp/catkin_ws/:/catkin_ws:rw
     network_mode: host
     restart: on-failure
     command: tail -f /dev/null
