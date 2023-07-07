@@ -13,3 +13,7 @@ services:
     network_mode: host
     restart: on-failure
     command: tail -f /dev/null
+
+
+#TODO:
+#dynamic path to user rosbags,catkin

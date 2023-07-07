@@ -1,3 +1,4 @@
+# Base image
 FROM ubuntu:20.04
 # Minimal setup
 ARG DEBIAN_FRONTEND=noninteractive
@@ -15,5 +16,6 @@ RUN apt-get install -y --no-install-recommends python3-rosdep
 RUN rosdep init \
  && rosdep fix-permissions \
  && rosdep update
-RUN apt update && apt install ros-noetic-soem
+# Install other packages required further
+RUN apt update && apt install ros-noetic-soem libnotify-dev doxygen ros-noetic-plotjuggler-ros plotjuggler
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
