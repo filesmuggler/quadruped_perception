@@ -10,6 +10,13 @@ Integration of F/T sensors, IMU and GNSS for Unitree Go1 Edu at PUT
 
 ## Workspace setup
 
+<figure>
+   <center>
+      <img src="./docs/imgs/dire_structure.jpg" >
+      <figcaption>Directory tree structure, Source: <a href="">Own work</a> </figcaption>
+   </center>
+</figure>
+
 Create tree of folders for your project:
 ```sh
 mkdir qp
