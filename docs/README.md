@@ -8,7 +8,13 @@ Integration of F/T sensors, IMU and GNSS for Unitree Go1 Edu at PUT
    </p>
 </figure>
 
+## ROS 1 - Noetic Ninjemys
 
+Go to [ROS1 page](./ROS1.md).
+
+## ROS 2 - Humble Hawksbill
+
+Go to [ROS2 page](./ROS2.md).
 
 
 

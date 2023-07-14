@@ -1,4 +1,4 @@
-# ROS1 (Noetic)
+# ROS1 (Noetic Ninjemys)
 
 ## Workspace setup
 
@@ -15,13 +15,15 @@ mkdir qp
 ```
 Clone the repository inside the main directory:
 ```sh
-git clone https://github.com/filesmuggler/quadruped_perception.git
+git clone -b noetic https://github.com/filesmuggler/quadruped_perception.git
 ```
+### Setup docker container
+
+### Run Vscode with SSH extension
 
 ## Rokubi Mini F/T+IMU sensors
 
 ### Compatibility issue
-
 Removing PDOs definitions for all types except A type broke the compatibility with older sensors like  BFT-ROK-11-40-xx type used in this project.
 
 <figure>
