@@ -3,41 +3,12 @@ Integration of F/T sensors, IMU and GNSS for Unitree Go1 Edu at PUT
 
 <figure>
    <p align="center">
-      <img src="./docs/imgs/unitree_put.jpg" >
+      <img src="./imgs/unitree_put.jpg" >
       <figcaption>Unitree Go1 Edu with external router mouted on top at Poznan University of Technology, Source: <a href="">Own work</a> </figcaption>
    </p>
 </figure>
 
-## Workspace setup
 
-<figure>
-   <p align="center">
-      <img src="./docs/imgs/dire_structure.jpg" >
-      <figcaption>Directory tree structure, Source: <a href="">Own work</a> </figcaption>
-   </p>
-</figure>
-
-Create tree of folders for your project:
-```sh
-mkdir qp
-```
-Clone the repository inside the main directory:
-```sh
-git clone https://github.com/filesmuggler/quadruped_perception.git
-```
-
-## Rokubi Mini F/T+IMU sensors
-
-### Compatibility issue
-
-Removing PDOs definitions for all types except A type broke the compatibility with older sensors like  BFT-ROK-11-40-xx type used in this project.
-
-<figure>
-   <p align="center">
-      <img src="./docs/imgs/dusk.jpeg"  width="100" height="100">
-      <figcaption>Foot image with rokubi mini F/T+IMU sensors. Source: <a href="">Own work</a> </figcaption>
-   </p>
-</figure>
 
 
 
@@ -68,7 +39,7 @@ References:
 
 <figure>
    <p align="center">
-      <img src="./docs/imgs/dusk.jpeg"  width="100" height="100">
+      <img src="./imgs/dusk.jpeg"  width="100" height="100">
       <figcaption>Rubber duck for debugging. Source: <a href="https://commons.wikimedia.org/wiki/File:Rubber_duck_assisting_with_debugging.jpg">Wikipedia</a> </figcaption>
    </p>
 </figure>

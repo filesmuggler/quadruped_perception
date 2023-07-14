@@ -1,15 +1,16 @@
 version: '3.9'
 services:
-  ros-user:
+  unitree:
     build: .
     privileged: true
     environment:
       - "DISPLAY=:1"
       - "QT_X11_NO_MITSHM=:1"
+      - "ROS_DOMAIN=:69"
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /home/yerba/Projects/qp/rosbags/:/rosbags:rw
-      - /home/yerba/Projects/qp/catkin_ws/:/catkin_ws:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rwx
+      - /home/yerba/Projects/qp/rosbags/:/rosbags:rwx
+      - /home/yerba/Projects/qp/colcon_ws/:/colcon_ws:rwx
     network_mode: host
     restart: on-failure
     command: tail -f /dev/null
