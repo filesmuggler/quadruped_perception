@@ -1,22 +1,26 @@
 # ROS1 (Noetic)
 
-## Workspace setup
+## User workspace setup
 
 <figure>
-   <p align="center">
-      <img src="./imgs/dire_structure.jpg" >
-      <figcaption>Directory tree structure, Source: <a href="">Own work</a> </figcaption>
+   <p style='text-align: center;'>
+      <img src="./imgs/dire_structure.jpg" width="200"><br>
+      Directory tree structure, Source: <a href="">Own work</a>
    </p>
 </figure>
 
 Create tree of folders for your project:
 ```sh
 mkdir qp
+cd qp
+mkdir -p catkin_ws/src && mkdir rosbags
+cd catkin_ws/src
 ```
-Clone the repository inside the main directory:
+Clone the repository inside the `src` directory:
 ```sh
-git clone https://github.com/filesmuggler/quadruped_perception.git
+git clone -b noetic https://github.com/filesmuggler/quadruped_perception.git
 ```
+Build the workspace
 
 ## Rokubi Mini F/T+IMU sensors
 
@@ -25,8 +29,8 @@ git clone https://github.com/filesmuggler/quadruped_perception.git
 Removing PDOs definitions for all types except A type broke the compatibility with older sensors like  BFT-ROK-11-40-xx type used in this project.
 
 <figure>
-   <p align="center">
-      <img src="./imgs/dusk.jpeg"  width="100" height="100">
-      <figcaption>Foot image with rokubi mini F/T+IMU sensors. Source: <a href="">Own work</a> </figcaption>
+   <p style='text-align: center;'>
+      <img src="./imgs/dusk.jpeg"  width="100" height="100"><br>
+      Foot image with rokubi mini F/T+IMU sensors. Source: <a href="">Own work</a> 
    </p>
 </figure>

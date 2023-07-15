@@ -2,14 +2,19 @@
 Integration of F/T sensors, IMU and GNSS for Unitree Go1 Edu at PUT
 
 <figure>
-   <p align="center">
-      <img src="./imgs/unitree_put.jpg" >
-      <figcaption>Unitree Go1 Edu with external router mouted on top at Poznan University of Technology, Source: <a href="">Own work</a> </figcaption>
+   <p style='text-align: center;'>
+      <img src="./imgs/unitree_put.jpg" ><br>
+      Unitree Go1 Edu with external router mouted on top at Poznan University of Technology, Source: <a href="">Own work</a>
    </p>
 </figure>
 
+## Docker setup
 
+Go to [Docker page](./Docker.md).
 
+## ROS 1 - Noetic Ninjemys
+
+Go to [ROS1 page](./ROS1.md).
 
 
 References:
@@ -38,8 +43,8 @@ References:
 
 
 <figure>
-   <p align="center">
-      <img src="./imgs/dusk.jpeg"  width="100" height="100">
-      <figcaption>Rubber duck for debugging. Source: <a href="https://commons.wikimedia.org/wiki/File:Rubber_duck_assisting_with_debugging.jpg">Wikipedia</a> </figcaption>
+   <p style='text-align: center;'>
+      <img src="./imgs/dusk.jpeg"  width="100" height="100"><br>
+      Rubber duck for debugging. Source: <a href="https://commons.wikimedia.org/wiki/File:Rubber_duck_assisting_with_debugging.jpg">Wikipedia</a> 
    </p>
 </figure>

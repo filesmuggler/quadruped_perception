@@ -16,6 +16,3 @@ RUN apt-get install -y --no-install-recommends python3-rosdep
 RUN rosdep init \
  && rosdep fix-permissions \
  && rosdep update
-# Install other packages required further
-RUN apt update && apt install ros-noetic-soem libnotify-dev doxygen ros-noetic-plotjuggler-ros plotjuggler
-RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
