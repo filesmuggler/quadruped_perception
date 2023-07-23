@@ -3,7 +3,7 @@ services:
   base:
     image: qp-base:20.04
     build: 
-      context: ./dockerfiles
+      context: ./base
       dockerfile: base.dockerfile
     container_name: qp-base-container
     privileged: true
@@ -15,23 +15,61 @@ services:
   rokubimini:
     image: qp-rokubimini:20.04
     build: 
-      context: ./dockerfiles
+      context: ./rokubi
       dockerfile: rokubimini.dockerfile
     container_name: qp-rokubi-container
     privileged: true
     environment:
+      - "ROS_MASTER_URI=http://192.168.123.161:11311"
+      - "ROS_HOSTNAME=192.168.123.163"
       - "DISPLAY=:1"
       - "QT_X11_NO_MITSHM=:1"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /home/yerba/Projects/qp/rokubi_ws/:/rokubi_ws:rw
+      - /home/put/Projects/QP/rokubi_ws/:/rokubi_ws:rw
+    network_mode: host
+    restart: on-failure
+    command: tail -f /dev/null
+  xsense:
+    image: qp-xsense:20.04
+    build: 
+      context: ./xsense
+      dockerfile: xsense.dockerfile
+    container_name: qp-xsense-container
+    privileged: true
+    environment:
+      - "ROS_MASTER_URI=http://192.168.123.161:11311"
+      - "ROS_HOSTNAME=192.168.123.163"
+      - "DISPLAY=:1"
+      - "QT_X11_NO_MITSHM=:1"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /home/put/Projects/QP/xsense_ws/:/xsense_ws:rw
+    network_mode: host
+    restart: on-failure
+    command: tail -f /dev/null
+  ublox:
+    image: qp-ublox:20.04
+    build: 
+      context: ./ublox
+      dockerfile: ublox.dockerfile
+    container_name: qp-ublox-container
+    privileged: true
+    environment:
+      - "ROS_MASTER_URI=http://192.168.123.161:11311"
+      - "ROS_HOSTNAME=192.168.123.163"
+      - "DISPLAY=:1"
+      - "QT_X11_NO_MITSHM=:1"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /home/put/Projects/QP/ublox_ws/:/ublox_ws:rw
     network_mode: host
     restart: on-failure
     command: tail -f /dev/null
   unitree:
     image: qp-unitree:20.04
     build: 
-      context: ./dockerfiles
+      context: ./unitree
       dockerfile: unitree.dockerfile
     container_name: qp-unitree-container
     privileged: true
@@ -42,7 +80,7 @@ services:
       - "QT_X11_NO_MITSHM=1"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /home/yerba/Projects/qp/unitree_ws/:/unitree_ws:rw
+      - /home/put/Projects/QP/unitree_ws/:/unitree_ws:rw
     network_mode: host
     restart: on-failure
     command: tail -f /dev/null
