@@ -5,4 +5,3 @@ RUN dpkg-reconfigure locales
 # Install other packages required further
 RUN apt update && apt install -y ruby-dev ros-noetic-soem libnotify-dev doxygen ros-noetic-plotjuggler-ros
 RUN gem install rake hoe
-RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc

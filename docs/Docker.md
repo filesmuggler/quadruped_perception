@@ -51,13 +51,31 @@ In separate terminals run following commands.
 ```sh
 sudo docker exec -it qp-unitree-container bash
 ```
+
+## Rokubi container setup
 ```sh
 sudo docker exec -it qp-rokubi-container bash
 ```
+
+Build workspace
 ```sh
-sudo docker exec -it qp-xsense-container bash
+cd rokubi_ws
+mkdir src && cd src
+git clone https://github.com/filesmuggler/rsl_rokubi.git
+cd ..
+catkin build && source devel/setup.bash
 ```
+Change `ethercat_bus` and `ethercat_address` parameters in `setup.yaml`:
 ```sh
-sudo docker exec -it qp-ublox-container bash
+nano src/rsl_rokubi/rokubimini_ethercat_sdk/rokubimini_ethercat_cosmo/config/setup.yaml
 ```
 
+
+Test sensors
+```sh
+#inside docker container
+cd rokubi_ws && source devel/setup.bash
+roslaunch rokubimini_ethercat_cosmo rokubimini_ethercat.launch
+```
+
+## Rokubi container run
