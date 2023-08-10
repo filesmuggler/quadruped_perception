@@ -5,3 +5,4 @@ RUN apt-get update \
 ARG DEBIAN_FRONTEND=noninteractive
 RUN dpkg-reconfigure locales
 # TODO: add more unitree specific packages
+RUN apt update && apt install -y ros-noetic-move-base-msgs liblcm-dev

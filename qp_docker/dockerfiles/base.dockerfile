@@ -4,7 +4,7 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
  && apt-get install -y locales lsb-release openssh-server nano gnupg\
- iputils-ping nmap git build-essential ruby-dev
+ iputils-ping nmap git build-essential ruby-dev net-tools
 RUN gem install rake hoe
 RUN dpkg-reconfigure locales
 # Install ROS Noetic
@@ -16,3 +16,5 @@ RUN apt-get install -y --no-install-recommends python3-rosdep
 RUN rosdep init \
  && rosdep fix-permissions \
  && rosdep update
+RUN apt update && apt install -y python3-catkin-tools
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
