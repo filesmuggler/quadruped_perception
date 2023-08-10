@@ -42,3 +42,64 @@ Similar issue:
 [Link](https://forums.developer.nvidia.com/t/jetson-nano-unable-to-communicate-with-serial-device/81928)
 
 # Jetson Xavier
+
+## Adding new sensor (serial port device)
+### Getting vendor ID 
+```bash
+udevadm info -a -p $(udevadm info -q path -n /dev/ttyUSB0) | grep idVendor | head -1
+```
+Output:
+```
+ATTRS{idVendor}=="2639"
+```
+### Getting product ID
+```bash
+udevadm info -a -p $(udevadm info -q path -n /dev/ttyUSB0) | grep idProduct | head -1
+```
+Output:
+```
+ATTRS{idProduct}=="0013"
+```
+
+### Setting udev rules
+Create file under `/etc/udev/rules.d` according to udev naming convention.<br>
+> Files should be named xx-descriptive-name.rules, the xx should be chosen first according to the following sequence points:
+>
+> * < 60  most user rules; if you want to prevent an assignment being overriden by default rules, use the := operator. These cannot access persistent information such as that from vol_id; these cannot access persistent information such as that from vol_id
+> * < 70  rules that run helpers such as vol_id to populate the udev db
+> * < 90  rules that run other programs (often using information in the udev db)
+> * \>=90  rules that should run last
+    
+So for example, create file `sudo nano /etc/udev/rules.d/55-your_sensor_name.rules` with the following content. Choose if it's ACM or USB interface.
+```
+KERNEL=="tty<ACM/USB>[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a9", MODE="0666", SYMLINK="tty<your custom name>"
+```
+
+Reload the rules
+```sh
+sudo udevadm control --reload-rules && udevadm trigger
+```
+Disconnect and connect sensor again. Run `ls /dev` to notice changes.
+
+
+### Install Xsense kernel modules
+https://base.xsens.com/s/question/0D509000016hfSCCAY/mti300-interfacing-with-nvidia-tx1-platform-kernel-31096?language=en_US
+
+Command
+```sh
+getconf LONG_BIT
+```
+Output:
+```
+64
+```
+
+Command
+```
+cd /usr/src/linux-headers-`uname -r`
+sudo make modules_prepare
+sudo git clone https://github.com/xsens/xsens_mt.git
+cd xsens_mt
+sudo make
+
+```
