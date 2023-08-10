@@ -1,14 +1,19 @@
-# Jetson setup
+# 1. Jetson setup (host)
 
-## Install SOEM
+## 1.1. Configure SOEM
 
-after installing soem add root for current user to run it
+Add root for current user to run it
 
 ```sh
 sudo setcap cap_net_admin,cap_net_raw=eip /opt/ros/melodic/bin/slaveinfo
 ```
 
-## Install newer GCC
+Map the network after connecting over EtherCAT.
+```sh
+slaveinfo eth1 -map
+```
+
+## 1.2. Install newer GCC
 
 ```sh
 gcc -V
@@ -28,11 +33,45 @@ sudo update-alternatives --config gcc
 sudo update-alternatives --config g++
 ```
 
+
+## 1.3. (OPTIONAL) Install ROS Noetic
+
+__Only for debugging purposes - not required__
+
+_Adapted from [Official ROS website](http://wiki.ros.org/noetic/Installation/Ubuntu)_
+
+Setup sources list
+```sh
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+```
+Set up keys
+```
+sudo apt install curl # if you haven't already installed curl
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+```
+Installation
+```sh
+sudo apt update
+sudo apt install ros-noetic-desktop-full
+```
+Environment setup
+```sh
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+Install dependencies for building packages
+```sh
+sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+sudo rosdep init
+rosdep update
+```
+
+
 ## Prepare custom description package
 
 robot.launch
 
-# Jetson setup
+# Jetson setup 
 
 ## 1 Used hardware
 ### 1.1. Required hardware
@@ -138,38 +177,6 @@ sudo nmcli con mod Wired\ connection\ 1 ipv4.addr "10.0.0.148/24" gw4 "10.0.0.1"
 Reboot Xavier.
 
 > ℹ️ Pro tip: check using `nmap` tool if the chosen ip address is free for you to use.
-
-
-## 6. (OPTIONAL) Install ROS Noetic
-
-_Adapted from [Official ROS website](http://wiki.ros.org/noetic/Installation/Ubuntu)_
-
-Setup sources list
-```sh
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-```
-Set up keys
-```
-sudo apt install curl # if you haven't already installed curl
-curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-```
-Installation
-```sh
-sudo apt update
-sudo apt install ros-noetic-desktop-full
-```
-Environment setup
-```sh
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
-```
-Install dependencies for building packages
-```sh
-sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
-sudo rosdep init
-rosdep update
-```
-
 
 ## 7. Install docker engine (if not installed by SDK Manager)
 

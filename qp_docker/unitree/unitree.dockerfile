@@ -6,6 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN dpkg-reconfigure locales
 # TODO: add more unitree specific packages
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-RUN apt update && apt-get install software-properties-common -y
+RUN apt update && apt-get install software-properties-common ros-noetic-move-base-msgs liblcm-dev -y
+RUN apt update && apt install -y ros-noetic-soem
 # update gcc and g++ to version 10
-RUN add-apt-repository ppa:ubuntu-toolchain-r/test && apt update && apt install -y gcc-10 g++-10 
+#RUN add-apt-repository ppa:ubuntu-toolchain-r/test && apt update && apt install -y gcc-10 g++-10 

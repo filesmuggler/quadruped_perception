@@ -49,6 +49,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /home/put/Projects/QP/xsense_ws/:/xsense_ws:rw
+      - /dev/:/dev/
     network_mode: host
     restart: on-failure
     command: tail -f /dev/null
@@ -69,6 +70,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /home/put/Projects/QP/ublox_ws/:/ublox_ws:rw
+      - /dev/:/dev/
     network_mode: host
     restart: on-failure
     command: tail -f /dev/null
