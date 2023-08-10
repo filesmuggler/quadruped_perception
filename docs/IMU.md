@@ -32,7 +32,7 @@
 10. Identify the baudrate for your further work.
 
 
-# Jetson
+# Jetson Nano
 
 Remove brltty (or maybe not)
 [Link1](https://community.platformio.org/t/could-not-configure-port-25-inappropriate-ioctl-for-device-linux-mint/34878/5)
@@ -40,3 +40,5 @@ Remove brltty (or maybe not)
 
 Similar issue:
 [Link](https://forums.developer.nvidia.com/t/jetson-nano-unable-to-communicate-with-serial-device/81928)
+
+# Jetson Xavier
