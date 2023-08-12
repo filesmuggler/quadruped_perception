@@ -235,5 +235,3 @@ roscore
     </figure>
 
 5. Use the pad to move around with the robot. Observe the changes in Rviz.
-    <video src="./vids/qp-walk.mov" controls="controls" style="max-width: 1000px;">
-    </video>
