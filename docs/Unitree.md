@@ -238,5 +238,7 @@ roscore
    https://github.com/filesmuggler/quadruped_perception/assets/19871652/601a5beb-03dd-475b-af82-6f8e1e89d6a0
 
 <video width="1000" controls>
-  <source src="./vids/qp-walk.mov" type="video/mp4">
+  <source src="https://github.com/filesmuggler/quadruped_perception/assets/19871652/601a5beb-03dd-475b-af82-6f8e1e89d6a0" type="video/mp4">
 </video>
+
+cccc
