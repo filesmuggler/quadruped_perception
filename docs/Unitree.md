@@ -65,7 +65,7 @@ In order to control robot with ROS controllers, you should make sure to stop bot
 
 2. Log into the RPI computer:
 ```bash
-ssh pi@192.168.123.16
+ssh pi@192.168.123.161
 ```
 Password is default: `123`
 
@@ -107,3 +107,18 @@ https://askubuntu.com/questions/1203635/installing-latest-cmake-on-ubuntu-18-04-
 https://askubuntu.com/questions/1192955/how-to-install-g-10-on-ubuntu-18-04
 +
 sudo nano /etc/hosts
+
+
+## Unitree guide (Run all step-by-step)
+
+### 1. Turn on the robot and the sensor box
+
+Make sure all peripherials are connected according to the schematics available below or in the [PDF file](./pdfs/qp_schematics.pdf).
+<figure>
+   <p style='text-align: center;'>
+      <img src="./imgs/qp-schematics.jpg" width="600"><br>
+      QP overview structure, Source: <a href="">Own work</a>
+   </p>
+</figure>
+
+
