@@ -116,7 +116,7 @@ sudo nano /etc/hosts
 Make sure all peripherials are connected according to the schematics available below or in the [PDF file](./pdfs/qp_schematics.pdf).
 <figure>
    <p style='text-align: center;'>
-      <img src="./imgs/qp-schematics.jpg" width="800"><br>
+      <img src="./imgs/qp-schematics.jpg" width="1000"><br>
       QP overview structure, Source: <a href="">Own work</a>
    </p>
 </figure>
