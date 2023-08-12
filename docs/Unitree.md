@@ -235,7 +235,5 @@ roscore
     </figure>
 
 5. Use the pad to move around with the robot. Observe the changes in Rviz.
-   ![Video]()
-
-    <video src="" controls="controls" style="max-width: 730px;">
-    </video>
+   
+   https://github.com/filesmuggler/quadruped_perception/assets/19871652/1b548864-3158-4d70-9e00-8bd818137ab0
