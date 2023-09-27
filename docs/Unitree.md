@@ -59,7 +59,19 @@ It loads `Legged_sport` controller executable file, which is the "sport" mode.
 
 In order to control robot with ROS controllers, you should make sure to stop both of them to avoid conflicts.
 
-### Stopping the onboard controllers
+
+### Prepare robot for research
+
+#### Startup loop for the robot
+
+<figure>
+   <p style='text-align: center;'>
+      <img src="./imgs/unitree-bootup.jpg" width="800"><br>
+      Startup procedure of Unitree, Source: <a href="">Own work</a>
+   </p>
+</figure>
+
+#### Stopping the onboard controllers
 
 1. Switch on the robot, let it standup
 
@@ -84,6 +96,9 @@ sudo kill -9 <PID for Legged_sport> <PID for keep_sport_alive>
 ```
 
 ![kill](./imgs/kill.png)
+
+Robot will fall if you kill the default binary controllers. Make sure to lay it down first.
+
 
 ### Running ROS controllers
 
@@ -134,7 +149,9 @@ Pres the switch on the side of the sensor box. Wait until Nvidia Jetson boots up
 
 ### 2. Robot controllers
 
-#### 2.1. Stop default controllers
+Skip to part 3 for automatic setup
+
+#### 2.1. Stop default controllers (manually)
 
 1. Switch on the robot, let it standup
 
@@ -144,7 +161,7 @@ Pres the switch on the side of the sensor box. Wait until Nvidia Jetson boots up
     ```
     Password is default: `123`
 
-2. Check the PID for `keep_sport_alive.sh` and `Legged_sport`
+3. Check the PID for `keep_sport_alive.sh` and `Legged_sport`
     ``` sh
     ps aux | grep "keep_sport_alive"
     ```
@@ -237,3 +254,50 @@ roscore
 5. Use the pad to move around with the robot. Observe the changes in Rviz.
    
    https://github.com/filesmuggler/quadruped_perception/assets/19871652/1b548864-3158-4d70-9e00-8bd818137ab0
+
+
+### 3. Robot controllers (automatic)
+
+#### 3.1 Modify .bashrc (RPI)
+Add env vars to the end of ~/.bashrc
+
+```
+export ROS_MASTER_URI=http://192.168.123.161:11311 
+export ROS_IP=192.168.123.161 
+export ROS_HOSTNAME=192.168.123.161
+```
+#### 3.2 Add `qpercept` dir
+
+1. Create `qpercept` direcotry in `~/Unitree/autostart/`
+2. Create script `qpercept.sh`. Paste following content, save.
+    ```
+    #!/bin/bash
+
+    eval echo "[qpercept] ROS starting... " $toStartlog
+    source ~/.bashrc
+    source /opt/ros/melodic/setup.bash
+    roscore &
+
+    ```
+3. Edit `~/Unitree/autostart/.startlist` to the following content
+    ```
+    updateDependencies
+    #roscore
+    configNetwork
+    #sportMode
+    #triggerSport
+    webMonitor
+    appTransit
+    #07obstacle
+    #utrack
+    programming
+    tunnel
+    qpercept
+    ```
+    Save.
+4. Reboot RPI. Robot should not stand automatically and `roscore` should be running in the background.
+5. To reverse the process comment out `qpercept` and uncomment the rest of the dirs.
+
+
+## Authors
+- [Krzysztof Stężała](https://github.com/filesmuggler)

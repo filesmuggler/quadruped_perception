@@ -48,3 +48,7 @@ References:
       Rubber duck for debugging. Source: <a href="https://commons.wikimedia.org/wiki/File:Rubber_duck_assisting_with_debugging.jpg">Wikipedia</a> 
    </p>
 </figure>
+
+
+## Authors
+- [Krzysztof Stężała](https://github.com/filesmuggler)
