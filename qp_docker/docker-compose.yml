@@ -28,7 +28,7 @@ services:
       - "QT_X11_NO_MITSHM=:1"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /home/put/Projects/QP/rokubi_ws/:/rokubi_ws:rw
+      - /home/${USER}/Projects/QP/rokubi_ws/:/rokubi_ws:rw
     network_mode: host
     restart: on-failure
     command: tail -f /dev/null
@@ -48,7 +48,7 @@ services:
       - "QT_X11_NO_MITSHM=:1"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /home/put/Projects/QP/xsense_ws/:/xsense_ws:rw
+      - /home/${USER}/Projects/QP/xsense_ws/:/xsense_ws:rw
       - /dev:/dev:rw
     network_mode: host
     restart: on-failure
@@ -69,7 +69,7 @@ services:
       - "QT_X11_NO_MITSHM=:1"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /home/put/Projects/QP/ublox_ws/:/ublox_ws:rw
+      - /home/${USER}/Projects/QP/ublox_ws/:/ublox_ws:rw
       - /dev:/dev:rw
     network_mode: host
     restart: on-failure
@@ -90,7 +90,7 @@ services:
       - "QT_X11_NO_MITSHM=1"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - /home/put/Projects/QP/unitree_ws/:/unitree_ws:rw
+      - /home/${USER}/Projects/QP/unitree_ws/:/unitree_ws:rw
     network_mode: host
     restart: on-failure
     command: tail -f /dev/null
