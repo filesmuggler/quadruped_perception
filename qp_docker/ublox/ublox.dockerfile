@@ -4,4 +4,5 @@ RUN apt-get update \
  && apt-get install -y locales lsb-release openssh-server nano gnupg iputils-ping nmap
 ARG DEBIAN_FRONTEND=noninteractive
 RUN dpkg-reconfigure locales
-# TODO: add more xsense specific packages
+# TODO: add more ublox specific packages
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc

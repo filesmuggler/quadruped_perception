@@ -59,13 +59,25 @@ It loads `Legged_sport` controller executable file, which is the "sport" mode.
 
 In order to control robot with ROS controllers, you should make sure to stop both of them to avoid conflicts.
 
-### Stopping the onboard controllers
+
+### Prepare robot for research
+
+#### Startup loop for the robot
+
+<figure>
+   <p style='text-align: center;'>
+      <img src="./imgs/unitree-bootup.jpg" width="800"><br>
+      Startup procedure of Unitree, Source: <a href="">Own work</a>
+   </p>
+</figure>
+
+#### Stopping the onboard controllers
 
 1. Switch on the robot, let it standup
 
 2. Log into the RPI computer:
 ```bash
-ssh pi@192.168.123.16
+ssh pi@192.168.123.161
 ```
 Password is default: `123`
 
@@ -84,6 +96,9 @@ sudo kill -9 <PID for Legged_sport> <PID for keep_sport_alive>
 ```
 
 ![kill](./imgs/kill.png)
+
+Robot will fall if you kill the default binary controllers. Make sure to lay it down first.
+
 
 ### Running ROS controllers
 
@@ -107,3 +122,182 @@ https://askubuntu.com/questions/1203635/installing-latest-cmake-on-ubuntu-18-04-
 https://askubuntu.com/questions/1192955/how-to-install-g-10-on-ubuntu-18-04
 +
 sudo nano /etc/hosts
+
+
+## Unitree guide (Run all step-by-step)
+
+### 1. Start up
+
+#### 1.1. Connect peripherials
+
+Make sure all peripherials are connected according to the schematics available below or in the [PDF file](./pdfs/qp_schematics.pdf).
+<figure>
+   <p style='text-align: center;'>
+      <img src="./imgs/qp-schematics.jpg" width="1000"><br>
+      QP overview structure, Source: <a href="">Own work</a>
+   </p>
+</figure>
+
+#### 1.2. Turn on the robot
+Press briefly once and press a little longer until all green diodes light up. You should hear the motors starting up.
+> ⚠️ **TODO:** add photo of before and after
+
+
+#### 1.3. Turn on the sensor box
+Pres the switch on the side of the sensor box. Wait until Nvidia Jetson boots up.
+> ⚠️ **TODO:** add photo of sensor box and switch
+
+### 2. Robot controllers
+
+Skip to part 3 for automatic setup
+
+#### 2.1. Stop default controllers (manually)
+
+1. Switch on the robot, let it standup
+
+2. Log into the RPI computer:
+    ```bash
+    ssh pi@192.168.123.161
+    ```
+    Password is default: `123`
+
+3. Check the PID for `keep_sport_alive.sh` and `Legged_sport`
+    ``` sh
+    ps aux | grep "keep_sport_alive"
+    ```
+    ``` sh
+    ps aux | grep "Legged_sport"
+    ```
+
+    Kill both processes with:
+
+    ```sh
+    sudo kill -9 <PID for Legged_sport> <PID for keep_sport_alive>
+    ```
+    <figure>
+    <p style='text-align: center;'>
+        <img src="./imgs/kill.png" width="1000"><br>
+        Processes running on RPi and their PID, Source: <a href="">Own work</a>
+    </p>
+    </figure>
+
+#### 2.2. Run roscore on RPI
+
+```bash
+roscore
+```
+
+#### 2.3. Run ROS controller on Jetson
+
+1. Log in to the Jetson in separate terminal.
+    ```bash
+    ssh put@192.168.123.164
+    ```
+    Password is default: `put`
+
+2. Make sure all containers are running.
+
+    ```bash
+    sudo docker ps
+    ```
+    <figure>
+    <p style='text-align: center;'>
+        <img src="./imgs/jetson-dockers.png" width="1000"><br>
+        Docker containers running on startup on the Jetson Xavier, Source: <a href="">Own work</a>
+    </p>
+    </figure>
+
+3. Enter the `qp-unitree-container` in two seprate terminals.
+
+    __Terminal 1:__
+    ```bash
+    sudo docker exec -it qp-unitree-container bash
+    ```
+    Source the workspace and run the controller.
+    ```bash
+    source unitree_ws/devel/setup.bash
+    cd unitree_ws && ./devel/lib/unitree_guide/junior_ctrl
+    ```
+    <figure>
+    <p style='text-align: center;'>
+        <img src="./imgs/run-controller.png" width="1000"><br>
+        Controller running on the Jetson, Source: <a href="">Own work</a>
+    </p>
+    </figure>
+
+    __Terminal 2:__
+    ```bash
+    sudo docker exec -it qp-unitree-container bash
+    ```
+    Source the workspace and launch the robot state publisher.
+    ```bash
+    source unitree_ws/devel/setup.bash
+    cd unitree_ws && roslaunch unitree_guide real.launch
+    ```
+
+4. On your PC enter the `qp-user-container` and run Rviz
+    ```bash
+    sudo docker exec -it qp-user-container bash
+    ```
+    Source the workspace and launch the rviz.
+    ```bash
+    source unitree_ws/devel/setup.bash
+    rviz
+    ```
+    <figure>
+    <p style='text-align: center;'>
+        <img src="./imgs/unitree-rviz.png" width="1000"><br>
+        Unitree in Rviz on user pc, Source: <a href="">Own work</a>
+    </p>
+    </figure>
+
+5. Use the pad to move around with the robot. Observe the changes in Rviz.
+   
+   https://github.com/filesmuggler/quadruped_perception/assets/19871652/1b548864-3158-4d70-9e00-8bd818137ab0
+
+
+### 3. Robot controllers (automatic)
+
+#### 3.1 Modify .bashrc (RPI)
+Add env vars to the end of ~/.bashrc
+
+```
+export ROS_MASTER_URI=http://192.168.123.161:11311 
+export ROS_IP=192.168.123.161 
+export ROS_HOSTNAME=192.168.123.161
+```
+#### 3.2 Add `qpercept` dir
+
+1. Create `qpercept` direcotry in `~/Unitree/autostart/`
+2. Create script `qpercept.sh`. Paste following content, save.
+    ```
+    #!/bin/bash
+
+    eval echo "[qpercept] ROS starting... " $toStartlog
+    source ~/.bashrc
+    source /opt/ros/melodic/setup.bash
+    roscore &
+
+    ```
+3. Edit `~/Unitree/autostart/.startlist` to the following content
+    ```
+    updateDependencies
+    #roscore
+    configNetwork
+    #sportMode
+    #triggerSport
+    webMonitor
+    appTransit
+    #07obstacle
+    #utrack
+    programming
+    tunnel
+    qpercept
+    ```
+    Save.
+4. Reboot RPI. Robot should not stand automatically and `roscore` should be running in the background.
+5. To reverse the process comment out `qpercept` and uncomment the rest of the dirs.
+
+
+## Authors
+- [Krzysztof Stężała](https://github.com/filesmuggler)

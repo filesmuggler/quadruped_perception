@@ -103,3 +103,16 @@ cd xsens_mt
 sudo make
 
 ```
+
+
+https://community.element14.com/products/manufacturers/xsens/b/blog/posts/interfacing-mti-devices-with-the-nvidia-jetson
+
+https://answers.ros.org/question/358786/xsense-ros-kinetic-package-error-usrbinld-cannot-find/
+
+```
+
+sudo chmod -R o+rw xsens_ros_mti_driver *
+
+pushd src/xsens_ros_mti_driver/lib/xspublic && make && popd
+
+```

@@ -39,3 +39,6 @@ Removing PDOs definitions for all types except A type broke the compatibility wi
       Foot image with rokubi mini F/T+IMU sensors. Source: <a href="">Own work</a> 
    </p>
 </figure>
+
+## Authors
+- [Krzysztof Stężała](https://github.com/filesmuggler)
